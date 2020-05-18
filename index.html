@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Crimson+Text&display=swap" rel="stylesheet">    <title>Password Generator</title>
+</head>
+<body>
+    <div class="app wrapper">
+        <div class="generator">
+            <div class="password-display gen-child"><h4>m123*&!@#</h4></div>
+                <div class="length">
+                    <label for="length">Length: <span class="lengthNum">19</span></label>
+                    <input type="range" name="length" id="length" min="8" max="30">
+                </div>
+                <div class="numbers">
+                    <label class="numb" for="numbers">Include numbers</label>
+                    <input type="checkbox" name="numbers" id="numbers">
+                </div>
+                <div class="symbols">
+                    <label class="symb" for="symbols">Symbols:  !@#$%^&*</label>
+                    <input type="checkbox" name="symbols" id="symbols">
+                </div>
+            <div class="button gen-child gen-pass">
+                <div class="buttonText">
+                    Generate Password
+                </div>
+            </div>
+            <div class="button gen-child use-pass">
+                <div class="buttonText">
+                    Use Password
+                </div>
+            </div>   
+        </div>
+        <div class="form">
+                <label for="url">
+                    <span>Website: </span>
+                </label>
+                <input type="text" name="url">
+
+                <label for="login">
+                    <span>Login: </span>
+                </label>
+                <input type="text" name="login">
+                
+                <label for="password">
+                    <span>Password: </span>
+                </label>
+                <input type="text" name="pass">
+
+                <div class="copyButton formButton">
+                    <span>Copy</span>
+                </div>
+                <div class="hideButton formButton">
+                    <span>Hide</span>
+                </div>
+                <div class="saveButton formButton">
+                    <span>Save</span>
+                </div>
+                <div class="discardButton formButton">
+                    <span>Discard</span>
+                </div>
+        </div>
+        <div class="vault">
+        </div>
+        <div class="infoBlock">
+            <div class="defInfoText">Select an entry there <===</div>
+        </div>
+    </div>
+<script src="app.js"></script>
+</body>
+</html>
