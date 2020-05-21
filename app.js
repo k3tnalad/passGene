@@ -17,6 +17,14 @@ const saveButton = form.querySelector('.saveButton');
 
 // VAULT SELECTORS 
 const vault = document.querySelector('.vault');
+const oneEntryElem = vault.querySelector('.entry');
+const entriesElems = vault.querySelectorAll('.entry');
+
+// INFOBLOCK SELECTORS
+const infoBlock = document.querySelector('.infoBlock');
+const infoDiv = infoBlock.querySelector('.info');
+const infoButtons = infoBlock.querySelectorAll('.infoButtons')
+
 
 
 // data
@@ -125,47 +133,59 @@ function highlightSymbols(string) {
 
 
 function handleSave() {
-    if (!formLogin || !formPass || !formWebsite) return;
+    if (!formLogin.value || !formPass.value || !formWebsite.value) return;
     const newEntry = {
         website: formWebsite.value,
         login: formLogin.value,
-        password: formPass.value,
+        password: [formPass.value, decrypify(formPass.value)],
         index: Math.floor(Math.random() * 10000),
     }
     updateEntries(newEntry)
-    console.log(`Here is your new saved password:
-    Website: ${newEntry.website},
-    Login: ${newEntry.login},
-    Password: ${newEntry.password}
-    `);
     formWebsite.value = '';
     formLogin.value = ''; 
     formPass.value = '';
-    vault.dispatchEvent(new CustomEvent('elementAdded'));
 }
 
-function domainName(url){
-    if (url.includes('//') || url.includes('www')) {
-        let first;
-        url.includes('www') ? first = url.split('www.') : first = url.split('//');
-        let second = first[1].split('.');
-        return second[0];
-    } else {
-        let naked = url.split('.');
-        return naked[0];
-    }
+function decrypify(string) {
+    return string.split('')
+                .map(i => i = '*')
+                .join('');
 }
 
 function updateEntries(entry) {
     entries.push(entry);
+    // creating a div
     let entryDiv = document.createElement('div');
-    let entryName = domainName((entry.website).toUpperCase());
-    entryDiv.innerHTML = `
-        <div class="entry" id="${entry.index}">
-            <span>${entryName}</span>
-        </div>`;
+    entryDiv.setAttribute('id', `${entries[entries.length - 1].index}`);
+
+    let entryName = entries[entries.length - 1].website;
+    let entryNameEl = document.createElement('span');
+    entryNameEl.innerText = `${entryName}`;
+    entryDiv.appendChild(entryNameEl);
     vault.appendChild(entryDiv);
 }
+
+// trying to listen for a click on elements that are not yet created.
+function fillInfoBlock(e) {
+    if(vault.childElementCount !== 0) {
+        const clickedEl = e.target;
+        let clickedEntry = entries.find(item => parseInt(item.index) === parseInt(clickedEl.id));
+        let html = `
+        <div>
+            <label id="site">Website: ${clickedEntry.website}</label>
+        </div>
+        <div>
+            <label id="log">Username: ${clickedEntry.login}</label>
+        </div>
+        <div>
+            <label id="pass">Password: ${clickedEntry.password[1]}</label>
+        </div>
+        `;
+        defChild.remove();
+        infoBlock.innerHTML = html;
+    }
+}
+
 
 
 // EVENT LISTENERS  
@@ -177,6 +197,5 @@ usePassButton.addEventListener('click', e => {
     e.preventDefault();
     formPass.value = passwordTitle.innerText;
 });
-
 saveButton.addEventListener('click', handleSave);
-vault.addEventListener('elementAdded', updateEntries)
+vault.addEventListener('click', fillInfoBlock);

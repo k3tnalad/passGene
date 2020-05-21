@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Crimson+Text&display=swap" rel="stylesheet">    <title>Password Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app wrapper">
@@ -36,35 +36,37 @@
                 <label for="url">
                     <span>Website: </span>
                 </label>
-                <input type="text" name="url">
+                <input type="text" name="url" autocomplete="off" placeholder="www.youtube.com">
 
                 <label for="login">
                     <span>Login: </span>
                 </label>
-                <input type="text" name="login">
+                <input type="text" name="login" autocomplete="off" placeholder="jetlaboratory@yahoo.com">
                 
                 <label for="password">
                     <span>Password: </span>
                 </label>
-                <input type="text" name="pass">
+                <input type="password" name="pass" autocomplete="off">
 
-                <div class="copyButton formButton">
-                    <span>Copy</span>
-                </div>
-                <div class="hideButton formButton">
-                    <span>Hide</span>
-                </div>
-                <div class="saveButton formButton">
+                <div class="saveButton">
                     <span>Save</span>
-                </div>
-                <div class="discardButton formButton">
-                    <span>Discard</span>
                 </div>
         </div>
         <div class="vault">
         </div>
         <div class="infoBlock">
-            <div class="defInfoText">Select an entry there <===</div>
+            <div class="info"></div>
+            <div class="infoButtons">
+                <div class="copyButton">
+                    <span>Copy Password</span>
+                </div>
+                <div class="hideButton">
+                    <span>Hide/Show Password</span>
+                </div>
+                <div class="discardButton">
+                    <span>Discard entry</span>
+                </div>
+            </div>
         </div>
     </div>
 <script src="app.js"></script>
